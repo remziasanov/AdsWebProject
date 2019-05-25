@@ -11,7 +11,7 @@ namespace Domain.Entities
     public class Advert :EntityBase<Guid>
     {
         /// <summary>
-        /// id пользователя
+        /// id объявления
         /// </summary>
         public int AdvertNumber { get; set; }
         /// <summary>
@@ -30,12 +30,12 @@ namespace Domain.Entities
         public int CategoryId { get; set; }
 
         /// <summary>
-        /// Категория
+        /// Регион
         /// </summary>
         public Region Region { get; set; }
 
         /// <summary>
-        /// Id категории
+        /// Id региона
         /// </summary>
         public int RegionId { get; set; }
 

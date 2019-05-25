@@ -18,6 +18,10 @@ namespace Domain.Entities
         public int RegionId { get; set; }
 
         /// <summary>
+        /// Список объявлений пользователя
+        /// </summary>
+        public virtual ICollection<Advert> Adverts { get; set; }
+        /// <summary>
         /// Адрес пользователя
         /// </summary>
         public string UserAdress { get; set; }
