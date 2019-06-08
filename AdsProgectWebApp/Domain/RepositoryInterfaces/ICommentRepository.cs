@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Domain.RepositoryInterfaces
 {
-    public interface IAdvertRepository : IRepositoryBase<Advert, Guid>
+    public interface ICommentRepository : IRepositoryBase<Comment, int>
     {
-        void Delete(Guid id);
-        Advert Get(Guid id);
+        void Delete(int id);
+        Comment Get(int id);
     }
 }

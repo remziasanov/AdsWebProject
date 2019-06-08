@@ -9,7 +9,7 @@ namespace Domain.RepositoryInterfaces
     public interface ICategoryRepository : IRepositoryBase<CategoryItem, int>
     {
         CategoryItem Get(string categoryName);
-        void Detele(int id);
+        void Delete(int id);
         CategoryItem Get(int id);
     }
 }

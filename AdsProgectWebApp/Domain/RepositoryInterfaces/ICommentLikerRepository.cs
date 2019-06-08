@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Domain.RepositoryInterfaces
 {
-    public interface IAdvertRepository : IRepositoryBase<Advert, Guid>
+    public interface ICommentLikerRepository : IRepositoryBase<CommentLiker, int>
     {
-        void Delete(Guid id);
-        Advert Get(Guid id);
+        bool AddLike(int commentId, Guid userId);
+        bool DeleteLike(int commentId, Guid userId);
     }
 }
