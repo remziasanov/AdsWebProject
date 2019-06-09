@@ -1,50 +1,63 @@
 ﻿using Domain.AdsDataContext;
 using Domain.Entities.Base;
 using Domain.RepositoryInterfaces.Base;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DomainData.Repositories.Base
 {
-    public abstract class BaseRepository<T, TId> : IRepositoryBase<T, TId> where T : EntityBase<TId>
+    public abstract class BaseRepository<TEntity, TId, TContext> : IRepositoryBase<TEntity, TId> 
+        where TEntity : EntityBase<TId>
+        where TContext : DbContext
     {
-        protected readonly DataContext _dbContext;
-        public BaseRepository(DataContext dbContext)
+        protected readonly TContext _dbContext;
+
+        public BaseRepository(TContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public TId Create(T entity)
+        public async Task<TEntity> Create(TEntity entity)
         {
-            _dbContext.Set<T>().Add(entity);
-            _dbContext.SaveChanges();
-            return entity.Id;
+            _dbContext.Set<TEntity>().Add(entity);
+            await _dbContext.SaveChangesAsync();
+            return entity;
         }
 
-        public virtual IQueryable<T> GetAll()
+        public async Task<TEntity> Get(TId id)
         {
-            var result = _dbContext.Set<T>();
+            return await _dbContext.Set<TEntity>().FindAsync(id);
+        }
+
+        public virtual IQueryable<TEntity> GetAll()
+        {
+            var result = _dbContext.Set<TEntity>();
             return result;
         }
 
-        public virtual IQueryable<T> GetLastEight()
+        public async Task<TEntity> Delete(TId id)
         {
-            var result = _dbContext.Set<T>();
-            return result;
+            var entity = await _dbContext.Set<TEntity>().FindAsync(id);
+            if (entity == null)
+            {
+                return entity;
+            }
+
+            _dbContext.Set<TEntity>().Remove(entity);
+            await _dbContext.SaveChangesAsync();
+
+            return entity;
         }
 
-        public T SaveOrUpdate(T entity)
+        public async Task<TEntity> Update(TEntity entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public TId Update(T entity)
-        {
-            _dbContext.Set<T>().Update(entity);
-            _dbContext.SaveChanges();
-            return entity.Id;
+            _dbContext.Set<TEntity>().Update(entity);
+            await _dbContext.SaveChangesAsync();
+            return entity;
         }
     }
 }

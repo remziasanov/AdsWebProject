@@ -6,5 +6,6 @@ namespace Domain.Entities.Base
 {
     public abstract class EntityBase<TId> : EntityWithTypedIdBase<TId>
     {
+
     }
 }

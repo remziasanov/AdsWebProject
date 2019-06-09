@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 
 namespace Domain.RepositoryInterfaces.Base
 {
-    public interface IRepositoryBase<T, TId> where T : EntityWithTypedIdBase<TId>
+    public interface IRepositoryBase<TEntity, TId> where TEntity : EntityWithTypedIdBase<TId>
     {
-        IQueryable<T> GetAll();
-        TId Create(T entity);
-        TId Update(T entity);
+        IQueryable<TEntity> GetAll();
+        Task<TEntity> Create(TEntity entity);
+        Task<TEntity> Update(TEntity entity);
+        Task<TEntity> Get(TId id);
+        Task<TEntity> Delete(TId id);
     }
 }
