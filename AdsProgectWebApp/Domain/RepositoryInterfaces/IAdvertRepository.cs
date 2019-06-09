@@ -6,9 +6,11 @@ using System.Text;
 
 namespace Domain.RepositoryInterfaces
 {
+    /// <summary>
+    /// Репозиторий для объявлений
+    /// </summary>
     public interface IAdvertRepository : IRepositoryBase<Advert, Guid>
     {
-        void Delete(Guid id);
-        Advert Get(Guid id);
+        // для дополнительных методов для работы с объявлениями
     }
 }

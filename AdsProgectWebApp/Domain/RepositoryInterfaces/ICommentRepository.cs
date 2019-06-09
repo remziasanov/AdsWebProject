@@ -8,7 +8,6 @@ namespace Domain.RepositoryInterfaces
 {
     public interface ICommentRepository : IRepositoryBase<Comment, int>
     {
-        void Delete(int id);
-        Comment Get(int id);
+
     }
 }
